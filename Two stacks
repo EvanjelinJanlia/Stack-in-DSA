@@ -1,0 +1,117 @@
+import java.util.Scanner;
+class TwoStacks {
+    private int[] arr;
+    private int top1, top2;
+    private int size;
+    public TwoStacks(int size) {
+        this.size = size;
+        arr = new int[size];
+        top1 = -1;
+        top2 = size;
+    }
+    public void push1(int x) {
+        if (top1 + 1 == top2) {
+            System.out.println("Stack1 is full");
+            return;
+        }
+        arr[++top1] = x;
+    }
+    public void push2(int x) {
+        if (top2 - 1 == top1) {
+            System.out.println("Stack2 is full");
+            return;
+        }
+        arr[--top2] = x;
+    }
+    public int pop1() {
+        if (top1 == -1) {
+            System.out.println("Stack1 is empty");
+            return -1000;
+        }
+        return arr[top1--];
+    }
+    public int pop2() {
+        if (top2 == size) {
+            System.out.println("Stack2 is empty");
+            return -1000;
+        }
+        return arr[top2++];
+    }
+    public void display1() {
+        if (top1 == -1) {
+            System.out.println("The contents of the stack1 are {}");
+            return;
+        }
+        System.out.print("The contents of the stack1 are ");
+        for (int i = 0; i <= top1; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    public void display2() {
+        if (top2 == size) {
+            System.out.println("The contents of the stack2 are {}");
+            return;
+        }
+        System.out.print("The contents of the stack2 are ");
+        for (int i = top2; i < size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    public static void printMenu() {
+        System.out.println("Choice 1 : Push1");
+        System.out.println("Choice 2 : Push2");
+        System.out.println("Choice 3 : Pop1");
+        System.out.println("Choice 4 : Pop2");
+        System.out.println("Choice 5 : Display1");
+        System.out.println("Choice 6 : Display2");
+        System.out.println("Any other choice : Exit");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the maximum size of the stack");
+        int size = sc.nextInt();
+        TwoStacks stacks = new TwoStacks(size);
+        while (true) {
+            TwoStacks.printMenu();
+            System.out.println("Enter your choice");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the element to be pushed in stack1");
+                    int elem1 = sc.nextInt();
+                    stacks.push1(elem1);
+                    break;
+                case 2:
+                    System.out.println("Enter the element to be pushed in stack2");
+                    int elem2 = sc.nextInt();
+                    stacks.push2(elem2);
+                    break;
+                case 3:
+                    int popped1 = stacks.pop1();
+                    if (popped1 != -1000) {
+                        System.out.println("The popped element from stack1 is " + popped1);
+                    }
+                    break;
+                case 4:
+                    int popped2 = stacks.pop2();
+                    if (popped2 != -1000) {
+                        System.out.println("The popped element from stack2 is " + popped2);
+                    }
+                    break;
+                case 5:
+                    stacks.display1();
+                    break;
+                case 6:
+                    stacks.display2();
+                    break;
+                default:
+                    sc.close();
+                    return;
+            }
+        }
+    }
+}
