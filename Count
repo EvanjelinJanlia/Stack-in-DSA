@@ -1,0 +1,100 @@
+import java.util.Scanner;
+class Node
+{
+    int data;
+    Node next;
+    Node (int data)
+    {
+        this.data=data;
+    }
+}
+class Stack
+{
+    Node top=null;
+    int c1=0,c2=0,c=0;
+    public void push( int data)
+    {
+        Node n=new Node(data);
+        n.next=top;
+        top=n;
+        c1++;
+    }
+    public void pop()
+    {
+        if(top==null)
+        {
+            System.out.println("Stack is empty");
+        }
+        else
+        {
+            Node temp=top;
+            System.out.println("The popped element is "+temp.data);
+            top=top.next;
+            temp=null;
+            c2++;
+        }
+    }
+    public void display()
+    {
+        Node temp=top;
+        if(top==null)
+        {
+            System.out.println("Stack is empty");
+        }
+        else
+        {
+            while(temp!=null)
+            {
+                System.out.print(temp.data+" ");
+                temp=temp.next;
+            }
+        }
+        System.out.print("\n");
+    }
+    public void count()
+    {
+        c=c1-c2;
+        System.out.println("Number of elements in the linked list is "+c);
+    }
+}
+public class Main
+{
+public static void main (String[] args) 
+    {
+        Scanner sc= new Scanner(System.in);
+        Stack s=new Stack();
+        int choice;
+        while(true)
+        {
+            System.out.println("Choice 1 :  To push data");
+            System.out.println("Choice 2 :  To pop data");
+            System.out.println("Choice 3 :  To Display");
+            System.out.println("Choice 4 :  To count");
+            System.out.print("\n");
+            System.out.println("Enter your choice");
+            choice = sc.nextInt();
+            switch(choice)
+            {
+                case 1:
+                    int data;
+                    System.out.println("Enter the data to be pushed");
+                    data=sc.nextInt();
+                    s.push(data);
+                    break;
+                case 2:
+                    s.pop();
+                    break;
+                case 3:
+                    System.out.print("The contents of the stack are ");
+                    s.display();
+                    break;
+                case 4:
+                    s.count();
+                    break;
+                default :
+                    sc.close();
+            }
+        }
+       
+    }
+}
